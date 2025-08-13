@@ -3,11 +3,13 @@ import cors from 'cors';
 
 import { initDB } from './config/db';
 import transactionsRoute from './routes/transactions.route';
+import rateLimiter from './middleware/rate-limiter';
 
 const app: Application = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
+app.use(rateLimiter);
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
