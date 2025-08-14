@@ -118,7 +118,7 @@ export default function SignUpScreen() {
           onChangeText={(password) => setPassword(password)}
         />
         <TouchableOpacity onPress={onSignUpPress} style={styles.button}>
-          <Text style={styles.buttonText}>Continue</Text>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
         <View style={styles.footerContainer}>
           <Text style={styles.footerText}>Already have an account?</Text>
