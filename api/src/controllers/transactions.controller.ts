@@ -82,17 +82,24 @@ const deleteTransaction = async (req: Request, res: Response) => {
 const getSummaryByUserId = async (req: Request, res: Response) => {
   try {
     const { user_id } = req.params;
-    const balance =
-      await sql`SELECT COALESCE(SUM(amount), 0) as balance FROM transactions WHERE user_id = ${user_id}`;
-    const totalIncome =
-      await sql`SELECT COALESCE(SUM(amount), 0) as balance FROM transactions WHERE user_id = ${user_id} AND category = 'income'`;
+    const balanceResult = await sql`
+      SELECT COALESCE(SUM(amount), 0) as balance FROM transactions WHERE user_id = ${user_id}
+    `;
+    const incomeResult = await sql`
+      SELECT COALESCE(SUM(amount), 0) as income FROM transactions
+      WHERE user_id = ${user_id} AND amount > 0
+    `;
+    const expensesResult = await sql`
+      SELECT COALESCE(SUM(amount), 0) as expenses FROM transactions
+      WHERE user_id = ${user_id} AND amount < 0
+    `;
 
     return res.status(200).json({
       message: 'Balance fetched successfully',
       data: {
-        balance: Number(balance[0].balance) - Number(totalIncome[0].balance),
-        totalIncome: Number(totalIncome[0].balance),
-        totalExpenses: balance[0].balance - totalIncome[0].balance,
+        balance: Number(balanceResult[0].balance),
+        income: Number(incomeResult[0].income),
+        expenses: Number(expensesResult[0].expenses),
       },
     });
   } catch (error) {
