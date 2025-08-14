@@ -90,7 +90,7 @@ const getSummaryByUserId = async (req: Request, res: Response) => {
     return res.status(200).json({
       message: 'Balance fetched successfully',
       data: {
-        balance: Number(balance[0].balance),
+        balance: Number(balance[0].balance) - Number(totalIncome[0].balance),
         totalIncome: Number(totalIncome[0].balance),
         totalExpenses: balance[0].balance - totalIncome[0].balance,
       },
