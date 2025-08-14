@@ -3,9 +3,17 @@ import { Link } from 'expo-router';
 import { Text, View } from 'react-native';
 
 import { SignOutButton } from '@/components';
+import { useTransactions } from '@/hooks/use-transactions';
+import { useEffect } from 'react';
 
 export default function Page() {
   const { user } = useUser();
+  const { transactions, summary, isLoading, loadData, deleteTransaction } =
+    useTransactions(user?.id!);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   return (
     <View>
