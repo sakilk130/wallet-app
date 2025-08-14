@@ -5,9 +5,9 @@ import { COLORS } from '@/constants/colors';
 
 interface BalanceCardProps {
   summary: {
-    balance: string;
-    totalIncome: string;
-    totalExpenses: string;
+    balance: any;
+    income: any;
+    expenses: any;
   };
 }
 
@@ -23,14 +23,14 @@ const BalanceCard = ({ summary }: BalanceCardProps) => {
         <View style={styles.balanceStatItem}>
           <Text style={styles.balanceStatLabel}>Income</Text>
           <Text style={[styles.balanceStatAmount, { color: COLORS.income }]}>
-            +${parseFloat(summary.totalIncome).toFixed(2)}
+            +${parseFloat(summary.income).toFixed(2)}
           </Text>
         </View>
         <View style={[styles.balanceStatItem, styles.statDivider]} />
         <View style={styles.balanceStatItem}>
           <Text style={styles.balanceStatLabel}>Expenses</Text>
           <Text style={[styles.balanceStatAmount, { color: COLORS.expense }]}>
-            -${Math.abs(parseFloat(summary.totalExpenses)).toFixed(2)}
+            -${Math.abs(parseFloat(summary.expenses)).toFixed(2)}
           </Text>
         </View>
       </View>
