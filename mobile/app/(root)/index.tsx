@@ -1,5 +1,7 @@
-import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo';
-import { Link, useRouter } from 'expo-router';
+import { useUser } from '@clerk/clerk-expo';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import {
   Alert,
   FlatList,
@@ -9,18 +11,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
 
+import { styles } from '@/assets/styles/home.styles';
 import {
   BalanceCard,
+  NoTransactionsFound,
   PageLoader,
   SignOutButton,
   TransactionItem,
-  NoTransactionsFound,
 } from '@/components';
 import { useTransactions } from '@/hooks/use-transactions';
-import { styles } from '@/assets/styles/home.styles';
 
 export default function Page() {
   const router = useRouter();

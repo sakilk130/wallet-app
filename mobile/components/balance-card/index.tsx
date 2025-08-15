@@ -12,7 +12,6 @@ interface BalanceCardProps {
 }
 
 const BalanceCard = ({ summary }: BalanceCardProps) => {
-  console.log(summary);
   return (
     <View style={styles.balanceCard}>
       <Text style={styles.balanceTitle}>Total Balance</Text>
